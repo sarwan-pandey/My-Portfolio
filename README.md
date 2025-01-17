@@ -1,1 +1,1 @@
-@copyright, Sarwan Kumar Pandey
+@copyright Sarwan Kumar Pandey
