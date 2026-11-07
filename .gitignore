@@ -1,6 +1,5 @@
-# Original reference backups
-Kushu Shukla _ Portfolio_files/
-Kushu Shukla _ Portfolio.html
-original_index.html
-original_script.js
-original_style.css
+# Operating System & Editor Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
