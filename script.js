@@ -212,9 +212,8 @@ if (menuIcon && navbar) {
     });
 }
 
-// Chatbot Backend Configuration
-// Replace with your live Render/Railway URL when deployed (e.g. "https://sarwan-portfolio-api.onrender.com/api/chat")
-const CHAT_BACKEND_URL = "http://localhost:8000/api/chat";
+// Live Render Cloud Backend with Gemini 1.5 Flash & Security Guardrails
+const CHAT_BACKEND_URL = "https://portfolio-7y99.onrender.com/api/chat";
 
 // Chatbot Logic
 function toggleChat() {
