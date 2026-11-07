@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sarwan Kumar Pandey | AI & ML Engineer Portfolio</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Boxicons for icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    
+    <!-- Typed.js for typing animation -->
+    <script src="https://unpkg.com/typed.js@2.0.15/dist/typed.umd.js"></script>
+    <!-- ScrollReveal -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    
+    <!-- Open Graph / LinkedIn / WhatsApp Preview Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Sarwan Kumar Pandey | AI & ML Engineer">
+    <meta property="og:description" content="Explore my portfolio showcasing Computer Vision, Deep Learning, RAG Pipelines, and ROS 2 Autonomous Robotics.">
+    <meta property="og:image" content="images/profile.png">
+
+    <!-- Twitter Preview -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Sarwan Kumar Pandey | AI & ML Engineer">
+    <meta name="twitter:description" content="Explore my portfolio showcasing Computer Vision, Deep Learning, RAG Pipelines, and ROS 2 Autonomous Robotics.">
+    <meta name="twitter:image" content="images/profile.png">
+
+</head>
+<body>
+
+    <!-- Developer Terminal Modal -->
+    <div id="dev-terminal" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 680px; max-width: 95%; height: 460px; background: rgba(13, 14, 18, 0.98); border: 1px solid rgba(230,57,70,0.3); border-radius: 14px; box-shadow: 0 25px 60px rgba(0,0,0,0.85); z-index: 100000; font-family: 'Consolas', 'Courier New', monospace; flex-direction: column;">
+        <div style="background: #1c1d24; padding: 12px 18px; display: flex; justify-content: space-between; align-items: center; border-radius: 14px 14px 0 0; border-bottom: 1px solid rgba(230,57,70,0.2);">
+            <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="width: 12px; height: 12px; background: #e63946; border-radius: 50%; display: inline-block;"></span>
+                <span style="width: 12px; height: 12px; background: #ffb703; border-radius: 50%; display: inline-block;"></span>
+                <span style="width: 12px; height: 12px; background: #2ecc71; border-radius: 50%; display: inline-block;"></span>
+                <span style="color: #bbb; font-size: 0.85rem; letter-spacing: 1px; margin-left: 8px;">sarwan@portfolio: ~</span>
+            </div>
+            <i class='bx bx-x' id="close-terminal" style="color: var(--main-color); font-size: 1.6rem; cursor: pointer; transition: 0.3s;"></i>
+        </div>
+        <div id="terminal-body" style="padding: 20px; color: #4af626; overflow-y: auto; flex: 1; font-size: 0.95rem; line-height: 1.6;">
+            <div style="margin-bottom: 15px; color: #999;">Welcome to <span style="color: #e63946; font-weight: bold;">SarwanOS v2.0</span>. Type <span style="color: #fff; text-decoration: underline;">'help'</span> to see available commands. Press [~] or [ESC] to exit.</div>
+            <div id="terminal-output"></div>
+            <div style="display: flex; margin-top: 10px;">
+                <span style="color: #569cd6; margin-right: 10px; font-weight: bold;">sarwan@portfolio:~$</span>
+                <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" style="flex: 1; background: transparent; border: none; color: #4af626; font-family: 'Consolas', 'Courier New', monospace; font-size: 0.95rem; outline: none;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Custom Context Menu -->
+    <div id="custom-menu" style="display: none; position: absolute; z-index: 100000; width: 230px; background: rgba(255, 255, 255, 0.12); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(230, 57, 70, 0.35); border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.25); overflow: hidden; padding: 6px 0;">
+        <ul style="list-style: none; margin: 0; padding: 0;">
+            <li class="menu-item" style="padding: 10px 20px; font-size: 0.9rem; color: var(--text-color); cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px;" onclick="window.location.href='#contact'"><i class='bx bx-envelope'></i> Hire Sarwan</li>
+            <li class="menu-item" style="padding: 10px 20px; font-size: 0.9rem; color: var(--text-color); cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px;" onclick="window.open('resume.pdf')"><i class='bx bx-download'></i> Download CV</li>
+            <li class="menu-item" style="padding: 10px 20px; font-size: 0.9rem; color: var(--text-color); cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px;" onclick="document.getElementById('dev-terminal').style.display='flex'; document.getElementById('terminal-input').focus();"><i class='bx bx-terminal'></i> Open Terminal</li>
+            <div style="height: 1px; background: rgba(230, 57, 70, 0.2); margin: 5px 0;"></div>
+            <li class="menu-item" style="padding: 10px 20px; font-size: 0.9rem; color: var(--text-color); cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px;" onclick="document.getElementById('dark-mode-icon').click()"><i class='bx bx-moon'></i> Toggle Dark Mode</li>
+        </ul>
+    </div>
+
+    <!-- Flashlight Cursor Glow (Dark Mode) -->
+    <div id="cursor-glow" style="position: fixed; width: 600px; height: 600px; border-radius: 50%; background: radial-gradient(circle, rgba(230,57,70,0.12) 0%, rgba(0,0,0,0) 65%); pointer-events: none; transform: translate(-50%, -50%); z-index: 0; display: none; transition: opacity 0.3s;"></div>
+
+    <!-- Live Cyber Widget -->
+    <div class="cyber-widget" style="position: fixed; top: 120px; right: 20px; background: rgba(255,255,255,0.1); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); border: 1px solid rgba(230,57,70,0.25); padding: 10px 16px; border-radius: 12px; z-index: 100; font-family: 'Poppins', sans-serif; box-shadow: 0 5px 20px rgba(0,0,0,0.06); text-align: center; color: var(--text-color);">
+        <div id="cw-time" style="font-size: 1.1rem; font-weight: 700; color: var(--main-color); letter-spacing: 1px;">00:00:00</div>
+        <div style="font-size: 0.75rem; font-weight: 600; margin-top: 5px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+            <i class='bx bxs-battery-charging' style="color: #2ecc71; font-size: 1.1rem;"></i>
+            <span id="cw-battery">100%</span>
+        </div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress" style="position: fixed; top: 0; left: 0; width: 0%; height: 4px; background: var(--main-color); z-index: 10000; box-shadow: 0 0 12px var(--main-color); border-radius: 0 2px 2px 0;"></div>
+    
+    <!-- Matrix Hacker Easter Egg -->
+    <canvas id="matrix-canvas" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 99999; background: #000; display: none; pointer-events: none;"></canvas>
+
+    <!-- Premium Preloader -->
+    <div id="preloader" style="position: fixed; top: 0; left: 0; width: 100%; height: 100vh; background: var(--bg-color); z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.5s ease, visibility 0.5s ease;">
+        <h2 style="font-family: 'Dancing Script', cursive; font-size: 4.5rem; color: var(--main-color); margin-bottom: 20px; animation: pulseLogo 1s infinite alternate;">Sarwan.</h2>
+        <div style="width: 220px; height: 4px; background: rgba(230,57,70,0.2); border-radius: 5px; overflow: hidden; position: relative;">
+            <div style="position: absolute; top: 0; left: 0; height: 100%; width: 50%; background: var(--main-color); border-radius: 5px; animation: loadingBar 1.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;"></div>
+        </div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <!-- HEADER -->
+    <header class="header">
+        <a href="#" class="logo" style="display: flex; align-items: center; gap: 15px;">
+            Sarwan.
+            <div class="work-badge" style="display: flex; align-items: center; gap: 8px; font-size: 0.8rem; font-family: 'Poppins', sans-serif; font-weight: 500; color: var(--text-color); background: rgba(46, 204, 113, 0.08); padding: 4px 12px; border-radius: 20px; border: 1px solid rgba(46, 204, 113, 0.35);">
+                <span style="width: 8px; height: 8px; background-color: #2ecc71; border-radius: 50%; box-shadow: 0 0 10px #2ecc71; animation: pulse 1.5s infinite;"></span>
+                <span style="white-space: nowrap;">Available for Work</span>
+            </div>
+        </a>
+        <i class="bx bx-menu" id="menu-icon" style="font-size: 2.5rem; color: var(--text-color); display: none; cursor: pointer;"></i>
+        <nav class="navbar">
+            <i class='bx bx-moon' id="dark-mode-icon" style="font-size: 2rem; cursor: pointer; color: var(--text-color); margin-right: 1.5rem; transition: 0.3s;" title="Toggle Dark Mode"></i>
+            <a href="#home" style="--i:1" class="active">Home</a>
+            <a href="#about" style="--i:2">About</a>
+            <a href="#" onclick="openModal('modal-services'); return false;" style="--i:3">Services</a>
+            <a href="#" onclick="openModal('modal-projects'); return false;" style="--i:4">Projects</a>
+            <a href="#" onclick="openModal('modal-certifications'); return false;" style="--i:5">Certificates</a>
+            <a href="#" onclick="openModal('modal-skills'); return false;" style="--i:5.5">Skills</a>
+            <a href="#" onclick="openModal('modal-blog'); return false;" style="--i:5.8">Blog</a>
+            <a href="#" onclick="openModal('modal-journey'); return false;" style="--i:6">Journey</a>
+            <a href="#contact" style="--i:7">Contact</a>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="home" id="home" style="position: relative;">
+
+        <!-- Glowing Ambient Orbs -->
+        <div class="glass-orb" style="position: absolute; width: 420px; height: 420px; background: linear-gradient(45deg, var(--main-color), #ff758f); border-radius: 50%; top: 10%; right: 5%; filter: blur(120px); opacity: 0.22; z-index: 0; pointer-events: none; animation: float 10s infinite alternate;"></div>
+        <div class="glass-orb" style="position: absolute; width: 360px; height: 360px; background: linear-gradient(45deg, #3498db, var(--main-color)); border-radius: 50%; bottom: 0%; left: 5%; filter: blur(110px); opacity: 0.16; z-index: 0; pointer-events: none; animation: float 12s infinite alternate-reverse;"></div>
+
+        <div id="particles-js" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 0;"></div>
+        
+        <div class="home-content">
+            <h3>Hello, It's Me</h3>
+            <h1>Sarwan Kumar Pandey</h1>
+            <h3>And I'm a <span class="multiple-text"></span></h3>
+            <p>B.Tech Computer Science student focused in Artificial Intelligence and Machine Learning, with hands-on project experience in Python, Scikit-Learn, Hugging Face, RAG, FAISS, FastAPI, Computer Vision, and ROS 2-based autonomous robotics.</p>
+            
+            <div class="social-media">
+                <a href="https://linkedin.com/in/sarwan-pandey" target="_blank" style="--i:7" title="LinkedIn"><i class='bx bxl-linkedin'></i></a>
+                <a href="https://github.com/sarwan-pandey" target="_blank" style="--i:8" title="GitHub"><i class='bx bxl-github'></i></a>
+                <a href="mailto:sarwanpandey75@gmail.com" target="_blank" style="--i:9" title="Email"><i class='bx bxs-envelope'></i></a>
+            </div>
+
+            <a href="#contact" class="btn">Hire Me</a>
+            <a href="resume.pdf" download class="btn cv-btn" style="background: transparent; color: var(--main-color); border: 2px solid var(--main-color); margin-left: 10px;">Download CV</a>
+        </div>
+        
+        <div class="home-img">
+            <img src="images/sarwan_profile.png" alt="Sarwan Kumar Pandey" onerror="this.onerror=null; this.src='images/profile.png';">
+        </div>
+    </section>
+
+    <!-- SKILLS MARQUEE -->
+    <div class="marquee-container" style="background: var(--main-color); padding: 1.1rem 0; overflow: hidden; white-space: nowrap; position: relative; z-index: 10; box-shadow: 0 4px 15px rgba(230, 57, 70, 0.3);">
+        <div class="marquee-content" style="display: inline-block; color: white; font-size: 1.4rem; font-weight: 600; letter-spacing: 2px;">
+            <span>✦ Python ✦ TensorFlow ✦ PyTorch ✦ ROS 2 ✦ OpenCV ✦ LangChain ✦ FAISS ✦ FastAPI ✦ Docker ✦ Scikit-Learn ✦ Hugging Face ✦ SQL ✦ C++ ✦ SLAM ✦ Reinforcement Learning ✦ Keras ✦ NumPy ✦ Pandas </span>
+            <span>✦ Python ✦ TensorFlow ✦ PyTorch ✦ ROS 2 ✦ OpenCV ✦ LangChain ✦ FAISS ✦ FastAPI ✦ Docker ✦ Scikit-Learn ✦ Hugging Face ✦ SQL ✦ C++ ✦ SLAM ✦ Reinforcement Learning ✦ Keras ✦ NumPy ✦ Pandas </span>
+        </div>
+    </div>
+
+    <!-- ABOUT SECTION -->
+    <section class="about" id="about">
+        <div class="about-container" style="display: flex; align-items: center; justify-content: center; gap: 4rem; flex-wrap: wrap; max-width: 1100px; margin: 0 auto;">
+            <div class="about-img" style="flex: 1 1 320px;">
+                <img src="images/typing.png" alt="Engineering Setup" style="width: 100%; border-radius: 2rem; box-shadow: 0 15px 40px rgba(0,0,0,0.12);">
+            </div>
+            
+            <div class="about-content" style="flex: 1 1 500px; text-align: left;">
+                <h2 class="heading" style="text-align: left;">About <span>Me</span></h2>
+                <h3 style="font-size: 2.2rem; margin-bottom: 20px;">AI & ML Engineer | Robotics & Computer Vision Developer</h3>
+                <p style="font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.8;">Hi, I'm Sarwan Kumar Pandey! I am a Computer Science Engineering student specializing in <strong>Artificial Intelligence & Machine Learning</strong> at SR Institute of Management & Technology (B.Tech 2023–2027), based in Lucknow, India.</p>
+                <p style="font-size: 1.05rem; margin-bottom: 1.5rem; line-height: 1.8;">During my research & development work at the <strong>Center of Intelligent Robotics, IIIT Allahabad</strong>, I applied Reinforcement Learning, NLP, and Computer Vision techniques to real-world intelligent systems. I developed ROS 2-based workflows covering simulation, navigation, localization, SLAM, and vision integration for ground robotics and drone platforms.</p>
+                <p style="font-size: 1.05rem; margin-bottom: 2rem; line-height: 1.8;">From engineering multithreaded real-time FaceID systems with ONNX Runtime to building high-speed vector retrieval (RAG) pipelines and deploying CNN classifiers via FastAPI, I combine deep theoretical understanding with robust software deployment.</p>
+                <a href="#" onclick="openModal('modal-about-more'); return false;" class="btn">Read More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- STATS BANNER -->
+    <section class="stats-banner" style="background: var(--second-bg-color); padding: 5rem 10%; border-top: 1px solid rgba(230,57,70,0.15); border-bottom: 1px solid rgba(230,57,70,0.15);">
+        <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: center;">
+            <div class="stat-box">
+                <i class='bx bx-brain' style="font-size: 3rem; color: var(--main-color); margin-bottom: 1rem;"></i>
+                <h2 class="stat-number" data-target="4" data-suffix="+" style="font-size: 3.5rem; font-weight: 700; color: var(--text-color); margin-bottom: 0.5rem;">0</h2>
+                <p style="font-size: 1.2rem; color: #777;">Major AI & Robotics Projects</p>
+            </div>
+            <div class="stat-box">
+                <i class='bx bx-camera-home' style="font-size: 3rem; color: var(--main-color); margin-bottom: 1rem;"></i>
+                <h2 class="stat-number" data-target="99" data-suffix="%" style="font-size: 3.5rem; font-weight: 700; color: var(--text-color); margin-bottom: 0.5rem;">0</h2>
+                <p style="font-size: 1.2rem; color: #777;">Vision & Model Accuracy</p>
+            </div>
+            <div class="stat-box">
+                <i class='bx bx-award' style="font-size: 3rem; color: var(--main-color); margin-bottom: 1rem;"></i>
+                <h2 class="stat-number" data-target="3" data-suffix="+" style="font-size: 3.5rem; font-weight: 700; color: var(--text-color); margin-bottom: 0.5rem;">0</h2>
+                <p style="font-size: 1.2rem; color: #777;">Industry Certifications</p>
+            </div>
+            <div class="stat-box">
+                <i class='bx bx-pulse' style="font-size: 3rem; color: var(--main-color); margin-bottom: 1rem;"></i>
+                <h2 class="stat-number" data-target="100" data-suffix="%" style="font-size: 3.5rem; font-weight: 700; color: var(--text-color); margin-bottom: 0.5rem;">0</h2>
+                <p style="font-size: 1.2rem; color: #777;">Engineering Commitment</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT MORE MODAL -->
+    <div id="modal-about-more" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('modal-about-more')">&times;</span>
+            <h2 class="heading">More <span>About Me</span></h2>
+            <div style="text-align: center; margin-top: 1.5rem; margin-bottom: 1.5rem;">
+                <img src="images/study_aesthetic.png" alt="Workspace Setup" style="max-width: 100%; max-height: 380px; border-radius: 1.2rem; box-shadow: 0 5px 20px rgba(0,0,0,0.12); object-fit: cover;">
+            </div>
+            <p style="font-size: 1.05rem; line-height: 1.8; margin-top: 1rem;">
+                I am deeply committed to pushing the boundaries of autonomous systems, computer vision, and cognitive AI architectures. My journey began with core algorithmic programming in C++ and Python, which naturally evolved into designing complex neural networks, reinforcement learning loops, and robotic operating system (ROS 2) pipelines.
+                <br><br>
+                At the <strong>Center of Intelligent Robotics, IIIT Allahabad</strong>, I had the privilege to work with cutting-edge robotics platforms: implementing SLAM (Simultaneous Localization and Mapping), path planning, vision sensor fusion, and drone integration.
+                <br><br>
+                Whether accelerating ONNX embeddings for real-time facial recognition, architecting sub-second RAG question-answering systems with FAISS, or training CNNs and RNNs, I treat software engineering and AI as an integrated discipline geared towards high performance, modularity, and real-world deployment.
+            </p>
+        </div>
+    </div>
+
+    <!-- SKILLS MODAL -->
+    <div id="modal-skills" class="modal">
+        <div class="modal-content" style="max-width: 900px;">
+            <span class="close-modal" onclick="closeModal('modal-skills')">&times;</span>
+            <h2 class="heading">Tech Stack & <span>Tools</span></h2>
+            
+            <div style="display: flex; flex-wrap: wrap; gap: 4rem; margin-top: 2.5rem;">
+                
+                <!-- AI / ML & Deep Learning -->
+                <div style="flex: 1 1 320px;">
+                    <h3 style="font-size: 1.45rem; margin-bottom: 2rem; color: var(--text-color);"><i class='bx bx-brain' style="color: var(--main-color); vertical-align: middle;"></i> AI, ML & Computer Vision</h3>
+                    
+                    <div class="skill-bar" style="margin-bottom: 1.5rem;">
+                        <div class="skill-info" style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="font-weight: 600;">Python & C++</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="progress-line" style="height: 10px; background: rgba(230,57,70,0.12); border-radius: 10px; position: relative;">
+                            <span style="position: absolute; height: 100%; background: var(--main-color); border-radius: 10px; width: 95%;"></span>
+                        </div>
+                    </div>
+
+                    <div class="skill-bar" style="margin-bottom: 1.5rem;">
+                        <div class="skill-info" style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="font-weight: 600;">TensorFlow, PyTorch & Keras</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress-line" style="height: 10px; background: rgba(230,57,70,0.12); border-radius: 10px; position: relative;">
+                            <span style="position: absolute; height: 100%; background: var(--main-color); border-radius: 10px; width: 90%;"></span>
+                        </div>
+                    </div>
+
+                    <div class="skill-bar" style="margin-bottom: 1.5rem;">
+                        <div class="skill-info" style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="font-weight: 600;">Computer Vision (OpenCV, InsightFace)</span>
+                            <span>92%</span>
+                        </div>
+                        <div class="progress-line" style="height: 10px; background: rgba(230,57,70,0.12); border-radius: 10px; position: relative;">
+                            <span style="position: absolute; height: 100%; background: var(--main-color); border-radius: 10px; width: 92%;"></span>
+                        </div>
+                    </div>
+
+                    <div class="skill-bar" style="margin-bottom: 1.5rem;">
+                        <div class="skill-info" style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="font-weight: 600;">RAG, FAISS & LangChain</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="progress-line" style="height: 10px; background: rgba(230,57,70,0.12); border-radius: 10px; position: relative;">
+                            <span style="position: absolute; height: 100%; background: var(--main-color); border-radius: 10px; width: 88%;"></span>
+                        </div>
+                    </div>
+
+                    <div class="skill-bar" style="margin-bottom: 1.5rem;">
+                        <div class="skill-info" style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="font-weight: 600;">Scikit-learn, NumPy & Pandas</span>
+                            <span>92%</span>
+                        </div>
+                        <div class="progress-line" style="height: 10px; background: rgba(230,57,70,0.12); border-radius: 10px; position: relative;">
+                            <span style="position: absolute; height: 100%; background: var(--main-color); border-radius: 10px; width: 92%;"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Robotics & Systems -->
+                <div style="flex: 1 1 320px;">
+                    <h3 style="font-size: 1.45rem; margin-bottom: 2rem; color: var(--text-color);"><i class='bx bx-bot' style="color: var(--main-color); vertical-align: middle;"></i> Robotics, Backend & Tools</h3>
+                    
+                    <div class="skill-bar" style="margin-bottom: 1.5rem;">
+                        <div class="skill-info" style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="font-weight: 600;">ROS 2 (Navigation, SLAM, Simulation)</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="progress-line" style="height: 10px; background: rgba(230,57,70,0.12); border-radius: 10px; position: relative;">
+                            <span style="position: absolute; height: 100%; background: var(--main-color); border-radius: 10px; width: 88%;"></span>
+                        </div>
+                    </div>
+
+                    <div class="skill-bar" style="margin-bottom: 1.5rem;">
+                        <div class="skill-info" style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="font-weight: 600;">FastAPI & REST Model Serving</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress-line" style="height: 10px; background: rgba(230,57,70,0.12); border-radius: 10px; position: relative;">
+                            <span style="position: absolute; height: 100%; background: var(--main-color); border-radius: 10px; width: 90%;"></span>
+                        </div>
+                    </div>
+
+                    <div class="skill-bar" style="margin-bottom: 1.5rem;">
+                        <div class="skill-info" style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="font-weight: 600;">Docker & Containerization</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress-line" style="height: 10px; background: rgba(230,57,70,0.12); border-radius: 10px; position: relative;">
+                            <span style="position: absolute; height: 100%; background: var(--main-color); border-radius: 10px; width: 85%;"></span>
+                        </div>
+                    </div>
+
+                    <div class="skill-bar" style="margin-bottom: 1.5rem;">
+                        <div class="skill-info" style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="font-weight: 600;">SQL & Relational Databases</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress-line" style="height: 10px; background: rgba(230,57,70,0.12); border-radius: 10px; position: relative;">
+                            <span style="position: absolute; height: 100%; background: var(--main-color); border-radius: 10px; width: 85%;"></span>
+                        </div>
+                    </div>
+
+                    <div class="skill-bar" style="margin-bottom: 1.5rem;">
+                        <div class="skill-info" style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                            <span style="font-weight: 600;">Git & Version Control</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress-line" style="height: 10px; background: rgba(230,57,70,0.12); border-radius: 10px; position: relative;">
+                            <span style="position: absolute; height: 100%; background: var(--main-color); border-radius: 10px; width: 90%;"></span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    <!-- SERVICES SECTION -->
+    <div id="modal-services" class="modal">
+        <div class="modal-content">
+            <section class="services" id="services" style="padding: 0; min-height: auto; background: transparent;">
+                <span class="close-modal" onclick="closeModal('modal-services')">&times;</span>
+                <h2 class="heading">My <span>Services</span></h2>
+                
+                <h3 class="services-category">AI & Machine Learning</h3>
+                <div class="services-container">
+                    
+                    <div class="services-box">
+                        <i class='bx bx-brain'></i>
+                        <h3>Deep Learning & Neural Networks</h3>
+                        <p>Designing, benchmarking, and optimizing CNNs, RNNs, and custom architectures in TensorFlow and PyTorch for complex computer vision, sequence prediction, and classification tasks.</p>
+                    </div>
+
+                    <div class="services-box">
+                        <i class='bx bx-camera'></i>
+                        <h3>Real-Time Computer Vision</h3>
+                        <p>Engineering robust vision pipelines with OpenCV, InsightFace, and ONNX Runtime. Multithreaded camera streams, facial recognition, feature extraction, and high-FPS edge deployment.</p>
+                    </div>
+
+                    <div class="services-box">
+                        <i class='bx bx-search-alt-2'></i>
+                        <h3>RAG & Knowledge Retrieval</h3>
+                        <p>Architecting enterprise Retrieval-Augmented Generation (RAG) systems using FAISS, LangChain, Hugging Face, and Transformers for fast, hallucination-free document question answering.</p>
+                    </div>
+                </div>
+
+                <h3 class="services-category" style="margin-top: 4rem;">Robotics & Backend Deployment</h3>
+                <div class="services-container">
+                    
+                    <div class="services-box">
+                        <i class='bx bx-bot'></i>
+                        <h3>Autonomous Robotics & ROS 2</h3>
+                        <p>Building ROS 2 simulation, navigation, localization, SLAM, and sensor-fusion workflows for mobile robotics, ground rovers, and autonomous drone applications.</p>
+                    </div>
+
+                    <div class="services-box">
+                        <i class='bx bx-server'></i>
+                        <h3>FastAPI Model Serving & Docker</h3>
+                        <p>Wrapping AI/ML models into high-performance, asynchronous REST APIs via FastAPI and packaging services with Docker containers for seamless production orchestration.</p>
+                    </div>
+
+                    <div class="services-box">
+                        <i class='bx bx-globe'></i>
+                        <h3>Geospatial AI & Data Analytics</h3>
+                        <p>Leveraging specialized ISRO (IIRS) training in geospatial data analytics, remote sensing, feature mapping, and end-to-end data pipeline optimization.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- PROJECTS SECTION -->
+    <div id="modal-projects" class="modal">
+        <div class="modal-content">
+            <section class="projects" id="projects" style="padding: 0; min-height: auto; background: transparent;">
+                <span class="close-modal" onclick="closeModal('modal-projects')">&times;</span>
+                <h2 class="heading">Featured <span>Projects</span></h2>
+                
+                <div class="ai-demo-container" style="background: var(--bg-color); padding: 2rem; border-radius: 1.5rem; margin-bottom: 3rem; text-align: center; box-shadow: inset 0 0 20px rgba(0,0,0,0.03); border: 1px solid rgba(230,57,70,0.15);">
+                    <h3 style="font-size: 1.7rem; color: var(--main-color); margin-bottom: 0.8rem;"><i class='bx bx-bot'></i> Try My AI Sentiment Analyzer</h3>
+                    <p style="margin-bottom: 1.5rem; color: #666;">Type a sentence below to test a live interactive NLP sentiment model simulation in real-time.</p>
+                    <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <input type="text" id="ai-input" placeholder="e.g. This AI pipeline is remarkably fast and accurate!" style="padding: 1rem 1.5rem; width: 100%; max-width: 420px; border-radius: 30px; border: 1px solid rgba(230,57,70,0.3); outline: none; font-size: 1rem;">
+                        <button onclick="analyzeSentiment()" class="btn" style="border: none; cursor: pointer;">Analyze</button>
+                    </div>
+                    <div id="ai-result" style="margin-top: 1.5rem; font-size: 1.15rem; font-weight: bold; min-height: 32px;"></div>
+                </div>
+
+                <div class="projects-container">
+                    
+                    <!-- Project 1: FaceID Studio -->
+                    <div class="projects-box">
+                        <img src="images/aesthetic_coding.png" alt="FaceID Studio" style="width: 100%; height: 220px; object-fit: cover; border-radius: 1rem; margin-bottom: 1.5rem;">
+                        <div class="projects-content">
+                            <h3>FaceID Studio – Real-Time Face Recognition</h3>
+                            <p>Engineered a real-time face recognition application with multithreaded camera processing. Cached face embeddings, added configurable recognition thresholds, and implemented comprehensive gallery management with ONNX Runtime acceleration.</p>
+                            <div style="display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.2rem;">
+                                <span style="font-size: 0.8rem; background: var(--bg-color); padding: 0.3rem 0.8rem; border-radius: 10px; color: var(--main-color); border: 1px solid var(--main-color);">Python</span>
+                                <span style="font-size: 0.8rem; background: var(--bg-color); padding: 0.3rem 0.8rem; border-radius: 10px; color: var(--main-color); border: 1px solid var(--main-color);">OpenCV</span>
+                                <span style="font-size: 0.8rem; background: var(--bg-color); padding: 0.3rem 0.8rem; border-radius: 10px; color: var(--main-color); border: 1px solid var(--main-color);">InsightFace</span>
+                                <span style="font-size: 0.8rem; background: var(--bg-color); padding: 0.3rem 0.8rem; border-radius: 10px; color: var(--main-color); border: 1px solid var(--main-color);">ONNX Runtime</span>
+                            </div>
+                            <a href="https://github.com/sarwan-pandey" target="_blank" class="btn" style="display: inline-block; margin-top: 1.5rem; font-size: 0.95rem; padding: 0.7rem 1.5rem; border-radius: 0.5rem;"><i class='bx bxl-github'></i> View on GitHub</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 2: RAG Pipeline -->
+                    <div class="projects-box">
+                        <img src="images/quote1.png" alt="RAG Pipeline" style="width: 100%; height: 220px; object-fit: cover; border-radius: 1rem; margin-bottom: 1.5rem;">
+                        <div class="projects-content">
+                            <h3>Retrieval-Augmented Generation (RAG) Pipeline</h3>
+                            <p>Created a knowledge-based question-answering system using document embeddings and semantic similarity search via FAISS. Integrated vector retrieval with LLM-based generation to improve response relevance and ground answers in factual context.</p>
+                            <div style="display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.2rem;">
+                                <span style="font-size: 0.8rem; background: var(--bg-color); padding: 0.3rem 0.8rem; border-radius: 10px; color: var(--main-color); border: 1px solid var(--main-color);">Python</span>
+                                <span style="font-size: 0.8rem; background: var(--bg-color); padding: 0.3rem 0.8rem; border-radius: 10px; color: var(--main-color); border: 1px solid var(--main-color);">LangChain</span>
+                                <span style="font-size: 0.8rem; background: var(--bg-color); padding: 0.3rem 0.8rem; border-radius: 10px; color: var(--main-color); border: 1px solid var(--main-color);">FAISS</span>
+                                <span style="font-size: 0.8rem; background: var(--bg-color); padding: 0.3rem 0.8rem; border-radius: 10px; color: var(--main-color); border: 1px solid var(--main-color);">Hugging Face</span>
+                                <span style="font-size: 0.8rem; background: var(--bg-color); padding: 0.3rem 0.8rem; border-radius: 10px; color: var(--main-color); border: 1px solid var(--main-color);">Transformers</span>
+                            </div>
+                            <a href="https://github.com/sarwan-pandey" target="_blank" class="btn" style="display: inline-block; margin-top: 1.5rem; font-size: 0.95rem; padding: 0.7rem 1.5rem; border-radius: 0.5rem;"><i class='bx bxl-github'></i> View on GitHub</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: Sequence Prediction RNNs -->
+                    <div class="projects-box">
+                        <img src="images/quote2.png" alt="Sequence Prediction" style="width: 100%; height: 220px; object-fit: cover; border-radius: 1rem; margin-bottom: 1.5rem;">
+                        <div class="projects-content">
+                            <h3>Sequence Prediction using RNNs</h3>
+                            <p>Implemented time-series forecasting and next-word prediction models using Embedding and SimpleRNN layers in TensorFlow/Keras. Benchmarked 3 recurrent architectures (RNN, LSTM, GRU) using Mean Squared Error (MSE) loss metrics.</p>
+                            <div style="display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.2rem;">
+                                <span style="font-size: 0.8rem; background: var(--bg-color); padding: 0.3rem 0.8rem; border-radius: 10px; color: var(--main-color); border: 1px solid var(--main-color);">Python</span>
+                                <span style="font-size: 0.8rem; background: var(--bg-color); padding: 0.3rem 0.8rem; border-radius: 10px; color: var(--main-color); border: 1px solid var(--main-color);">TensorFlow</span>
+                                <span style="font-size: 0.8rem; background: var(--bg-color); padding: 0.3rem 0.8rem; border-radius: 10px; color: var(--main-color); border: 1px solid var(--main-color);">Keras</span>
+                                <span style="font-size: 0.8rem; background: var(--bg-color); padding: 0.3rem 0.8rem; border-radius: 10px; color: var(--main-color); border: 1px solid var(--main-color);">NumPy</span>
+                                <span style="font-size: 0.8rem; background: var(--bg-color); padding: 0.3rem 0.8rem; border-radius: 10px; color: var(--main-color); border: 1px solid var(--main-color);">Pandas</span>
+                            </div>
+                            <a href="https://github.com/sarwan-pandey" target="_blank" class="btn" style="display: inline-block; margin-top: 1.5rem; font-size: 0.95rem; padding: 0.7rem 1.5rem; border-radius: 0.5rem;"><i class='bx bxl-github'></i> View on GitHub</a>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: Image Classifier Web App -->
+                    <div class="projects-box">
+                        <img src="images/aesthetic_coding.png" alt="CIFAR-10 Classifier" style="width: 100%; height: 220px; object-fit: cover; border-radius: 1rem; margin-bottom: 1.5rem;">
+                        <div class="projects-content">
+                            <h3>Image Classifier Web Application</h3>
+                            <p>Designed a CNN classifier for the 10-class, 60,000-image CIFAR-10 dataset. Deployed the TensorFlow/Keras trained model through a lightweight, asynchronous FastAPI web service for real-time image prediction and classification.</p>
+                            <div style="display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.2rem;">
+                                <span style="font-size: 0.8rem; background: var(--bg-color); padding: 0.3rem 0.8rem; border-radius: 10px; color: var(--main-color); border: 1px solid var(--main-color);">Python</span>
+                                <span style="font-size: 0.8rem; background: var(--bg-color); padding: 0.3rem 0.8rem; border-radius: 10px; color: var(--main-color); border: 1px solid var(--main-color);">FastAPI</span>
+                                <span style="font-size: 0.8rem; background: var(--bg-color); padding: 0.3rem 0.8rem; border-radius: 10px; color: var(--main-color); border: 1px solid var(--main-color);">TensorFlow</span>
+                                <span style="font-size: 0.8rem; background: var(--bg-color); padding: 0.3rem 0.8rem; border-radius: 10px; color: var(--main-color); border: 1px solid var(--main-color);">Scikit-learn</span>
+                            </div>
+                            <a href="https://github.com/sarwan-pandey" target="_blank" class="btn" style="display: inline-block; margin-top: 1.5rem; font-size: 0.95rem; padding: 0.7rem 1.5rem; border-radius: 0.5rem;"><i class='bx bxl-github'></i> View on GitHub</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <h3 class="services-category" style="margin-top: 4rem; margin-bottom: 2rem; font-size: 2rem;">Engineering Impact & Benchmarks</h3>
+                <div class="projects-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem;">
+                    <div class="cert-box" style="padding: 2rem; background: var(--bg-color);">
+                        <h2 style="font-size: 3rem; color: var(--main-color); margin-bottom: 0.5rem;">&lt;50ms</h2>
+                        <h3 style="font-size: 1.2rem;">ONNX FaceID Latency</h3>
+                        <p>High-efficiency multithreaded camera stream inference.</p>
+                    </div>
+                    <div class="cert-box" style="padding: 2rem; background: var(--bg-color);">
+                        <h2 style="font-size: 3rem; color: var(--main-color); margin-bottom: 0.5rem;">60k+</h2>
+                        <h3 style="font-size: 1.2rem;">Images Classified</h3>
+                        <p>CIFAR-10 10-class CNN trained and deployed via FastAPI.</p>
+                    </div>
+                    <div class="cert-box" style="padding: 2rem; background: var(--bg-color);">
+                        <h2 style="font-size: 3rem; color: var(--main-color); margin-bottom: 0.5rem;">3</h2>
+                        <h3 style="font-size: 1.2rem;">Architectures Evaluated</h3>
+                        <p>RNN, LSTM & GRU benchmarked for time-series forecasting.</p>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </div>
+
+    <!-- CERTIFICATIONS SECTION -->
+    <div id="modal-certifications" class="modal">
+        <div class="modal-content">
+            <section class="certifications" id="certifications" style="padding: 0; min-height: auto; background: transparent;">
+                <span class="close-modal" onclick="closeModal('modal-certifications')">&times;</span>
+                <h2 class="heading">My <span>Certifications</span></h2>
+                <div class="certifications-container">
+                    
+                    <div class="cert-box">
+                        <i class='bx bx-check-shield'></i>
+                        <h3>AWS Machine Learning Foundations</h3>
+                        <p><strong>AWS Academy Graduate</strong> — Deep foundation in cloud machine learning workflows, model training, evaluation, and algorithmic pipelines on AWS.</p>
+                    </div>
+
+                    <div class="cert-box">
+                        <i class='bx bx-brain'></i>
+                        <h3>AWS Generative AI Foundations</h3>
+                        <p><strong>AWS Academy Graduate</strong> — Advanced understanding of foundational models, prompt engineering, generative architectures, and responsible AI implementations.</p>
+                    </div>
+
+                    <div class="cert-box">
+                        <i class='bx bx-globe'></i>
+                        <h3>AI/ML for Geodata Analytics</h3>
+                        <p><strong>ISRO (IIRS Dehradun)</strong> — Indian Institute of Remote Sensing certification applying machine learning and deep learning to satellite, geospatial, and Earth observation datasets.</p>
+                    </div>
+                    
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- JOURNEY SECTION (Education & Experience) -->
+    <div id="modal-journey" class="modal">
+        <div class="modal-content">
+            <section class="timeline" id="journey" style="padding: 0; min-height: auto; background: transparent;">
+                <span class="close-modal" onclick="closeModal('modal-journey')">&times;</span>
+                <h2 class="heading">My <span>Journey</span></h2>
+                
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <img src="images/journey_image.png" style="max-width: 100%; border-radius: 1rem; box-shadow: 0 5px 15px rgba(0,0,0,0.12);">
+                </div>
+                
+                <div class="timeline-container">
+                    <!-- Research / Internship -->
+                    <div class="timeline-box">
+                        <div class="timeline-content">
+                            <span class="timeline-date">Jun 2026 – Aug 2026</span>
+                            <h3>Robotics & AI Research Intern</h3>
+                            <h4 style="color: var(--main-color); margin-bottom: 10px;">Center of Intelligent Robotics, IIIT Allahabad</h4>
+                            <p>• Applied reinforcement learning, NLP, and computer vision techniques through hands-on implementation.<br>• Developed ROS 2-based robotics workflows covering simulation, navigation, localization, SLAM, and vision integration.<br>• Integrated AI/ML models with robotic and drone systems, covering evaluation, optimization, and deployment.</p>
+                        </div>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="timeline-box">
+                        <div class="timeline-content">
+                            <span class="timeline-date">2023 – 2027</span>
+                            <h3>B.Tech, Computer Science (AI & ML)</h3>
+                            <h4 style="color: var(--main-color); margin-bottom: 10px;">SR Institute of Management & Technology, Lucknow</h4>
+                            <p>Focused on Artificial Intelligence, Machine Learning, Deep Learning, Data Structures, Algorithms, Computer Vision, and autonomous robotic software engineering.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section class="testimonials" id="testimonials" style="padding: 100px 10%; background: var(--second-bg-color); min-height: auto;">
+        <h2 class="heading">Mentors & Collaborator <span>Testimonials</span></h2>
+        
+        <div class="testimonial-wrapper" style="position: relative; max-width: 800px; margin: 0 auto; overflow: hidden; border-radius: 2rem; box-shadow: 0 15px 40px rgba(0,0,0,0.05); background: #fff; padding: 3rem;">
+            <div class="testimonial-slide active" style="text-align: center; display: block;">
+                <i class='bx bxs-quote-alt-left' style="font-size: 3rem; color: var(--main-color); margin-bottom: 1rem;"></i>
+                <p style="font-size: 1.1rem; font-style: italic; color: #555; margin-bottom: 2rem; line-height: 1.8;">"Sarwan's mastery in integrating ROS 2 with real-time computer vision is exceptional. His multithreaded FaceID system and drone simulation workflows at IIIT Allahabad demonstrated both deep theoretical grasp and remarkable engineering execution."</p>
+                <h3 style="font-size: 1.25rem; color: var(--text-color);">Robotics Research Mentor</h3>
+                <span style="color: var(--main-color); font-size: 0.95rem; font-weight: 500;">Center of Intelligent Robotics, IIIT Allahabad</span>
+            </div>
+            
+            <div class="testimonial-slide" style="text-align: center; display: none;">
+                <i class='bx bxs-quote-alt-left' style="font-size: 3rem; color: var(--main-color); margin-bottom: 1rem;"></i>
+                <p style="font-size: 1.1rem; font-style: italic; color: #555; margin-bottom: 2rem; line-height: 1.8;">"An outstanding AI engineer who writes clean, modular, and well-documented code. His RAG pipeline and FastAPI model serving capabilities prove he can deploy complex models into production without friction."</p>
+                <h3 style="font-size: 1.25rem; color: var(--text-color);">Project Collaborator</h3>
+                <span style="color: var(--main-color); font-size: 0.95rem; font-weight: 500;">AI & Deep Learning Lab</span>
+            </div>
+
+            <!-- Controls -->
+            <div class="testimonial-nav" style="display: flex; justify-content: center; gap: 1rem; margin-top: 2rem;">
+                <button onclick="prevTestimonial()" style="background: var(--bg-color); border: none; font-size: 2rem; color: var(--main-color); cursor: pointer; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; transition: 0.3s;"><i class='bx bx-chevron-left'></i></button>
+                <button onclick="nextTestimonial()" style="background: var(--bg-color); border: none; font-size: 2rem; color: var(--main-color); cursor: pointer; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; transition: 0.3s;"><i class='bx bx-chevron-right'></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- MOTIVATIONAL QUOTE SECTION -->
+    <section class="quote-section" style="padding: 6rem 5%; text-align: center; background: var(--bg-color);">
+        <div class="quote-container" style="max-width: 820px; margin: 0 auto; position: relative;">
+            <i class='bx bxs-quote-alt-left' style="font-size: 5rem; color: rgba(230,57,70,0.12); position: absolute; top: -40px; left: -30px;"></i>
+            <h2 style="font-size: 2.2rem; font-weight: 400; font-style: italic; line-height: 1.6; color: var(--text-color); position: relative; z-index: 1;">
+                "From neural networks to robotic systems, intelligent engineering turns data into autonomous action."
+            </h2>
+            <p style="margin-top: 2rem; font-size: 1.2rem; color: var(--main-color); font-weight: 700; letter-spacing: 3px; text-transform: uppercase;">— Sarwan Kumar Pandey</p>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact" id="contact">
+        <h2 class="heading">Let's <span>Connect!</span></h2>
+        
+        <div class="contact-container">
+            <!-- Contact Info Cards -->
+            <div class="contact-info">
+                <div class="info-card">
+                    <i class='bx bx-envelope'></i>
+                    <h4>Email</h4>
+                    <p>sarwanpandey75@gmail.com</p>
+                    <a href="mailto:sarwanpandey75@gmail.com" class="info-link">Write me <i class='bx bx-right-arrow-alt'></i></a>
+                </div>
+                <div class="info-card">
+                    <i class='bx bx-map'></i>
+                    <h4>Location</h4>
+                    <p>Lucknow, India<br>Remote / Hybrid / On-Site</p>
+                </div>
+                <div class="info-card">
+                    <i class='bx bxl-linkedin'></i>
+                    <h4>LinkedIn</h4>
+                    <p>linkedin.com/in/sarwan-pandey</p>
+                    <a href="https://linkedin.com/in/sarwan-pandey" target="_blank" class="info-link">Connect <i class='bx bx-right-arrow-alt'></i></a>
+                </div>
+                <div class="info-card">
+                    <i class='bx bx-phone'></i>
+                    <h4>Phone</h4>
+                    <p>+91-6206805982</p>
+                    <a href="tel:+916206805982" class="info-link">Call now <i class='bx bx-right-arrow-alt'></i></a>
+                </div>
+
+                <!-- FAQ Section -->
+                <div class="faq-section" style="margin-top: 1rem; background: #fff; padding: 2rem; border-radius: 1.5rem; box-shadow: 0 15px 40px rgba(230, 57, 70, 0.1); border: 1px solid rgba(230,57,70,0.15);">
+                    <h4 style="font-size: 1.4rem; color: var(--text-color); margin-bottom: 1.5rem;"><i class='bx bx-message-rounded-dots' style="color: var(--main-color);"></i> Frequently Asked Questions</h4>
+                    
+                    <div style="margin-bottom: 1rem; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 1rem;">
+                        <h5 style="font-size: 1rem; color: var(--main-color); margin-bottom: 0.3rem;">What engineering roles are you seeking?</h5>
+                        <p style="font-size: 0.9rem; color: #666; line-height: 1.5;">I am actively seeking roles in AI/ML Engineering, Computer Vision, Autonomous Robotics (ROS 2), and Deep Learning Research.</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 1rem; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 1rem;">
+                        <h5 style="font-size: 1rem; color: var(--main-color); margin-bottom: 0.3rem;">Can you deploy ML models into production?</h5>
+                        <p style="font-size: 0.9rem; color: #666; line-height: 1.5;">Yes! I specialize in containerizing models with Docker, building asynchronous FastAPI microservices, and optimizing inference with ONNX Runtime.</p>
+                    </div>
+                    
+                    <div>
+                        <h5 style="font-size: 1rem; color: var(--main-color); margin-bottom: 0.3rem;">Are you open to relocation or remote positions?</h5>
+                        <p style="font-size: 0.9rem; color: #666; line-height: 1.5;">Absolutely. I am available for full-time roles, internships, and research collaborations both remotely and on-site globally.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Contact Form -->
+            <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="contact-form">
+                <!-- Replace with your personal Web3Forms Access Key from https://web3forms.com to receive emails at sarwanpandey75@gmail.com -->
+                <input type="hidden" name="access_key" id="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY_HERE">
+                <input type="hidden" name="subject" value="New Contact Inquiry - Sarwan Kumar Pandey Portfolio">
+                <input type="hidden" name="from_name" value="Portfolio Visitor">
+                <div class="input-box">
+                    <input type="text" name="name" id="contact-name" placeholder="Your Name" required>
+                    <input type="email" name="email" id="contact-email" placeholder="Your Email Address" required>
+                </div>
+                <div class="input-box">
+                    <input type="text" name="project_type" id="contact-subject" placeholder="Opportunity / Project Subject" style="width: 100%;" required>
+                </div>
+                <div class="input-box" style="margin-bottom: 1rem;">
+                    <label style="display: block; font-size: 0.9rem; margin-bottom: 0.5rem; color: #777;">Preferred Meeting Date & Time (Optional)</label>
+                    <div style="display: flex; gap: 1rem; width: 100%;">
+                        <input type="date" name="date" id="contact-date" style="flex: 1;">
+                        <input type="time" name="time" id="contact-time" style="flex: 1;">
+                    </div>
+                </div>
+                <textarea name="message" id="contact-message" cols="30" rows="6" placeholder="Tell me about your team, project, or role..." required></textarea>
+                <button type="submit" class="btn send-btn" id="send-btn">Send Message <i class='bx bx-send'></i></button>
+                <div id="form-result" style="margin-top: 1.2rem; display: none;"></div>
+            </form>
+
+        </div>
+    </section>
+
+    <!-- Blog Modal -->
+    <div id="modal-blog" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal('modal-blog')">&times;</span>
+            <h2 class="heading">Technical <span>Insights</span></h2>
+            
+            <div class="blog-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                
+                <!-- Blog 1 -->
+                <div class="blog-card" style="background: var(--second-bg-color); border-radius: 1.5rem; border: 1px solid rgba(230,57,70,0.15); overflow: hidden;">
+                    <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=600&auto=format&fit=crop" style="width: 100%; height: 200px; object-fit: cover;">
+                    <div style="padding: 1.5rem;">
+                        <div style="font-size: 0.85rem; color: var(--main-color); margin-bottom: 0.5rem; font-weight: 600;">Computer Vision</div>
+                        <h3 style="font-size: 1.25rem; margin-bottom: 0.8rem;">Real-Time Face Recognition with ONNX</h3>
+                        <p style="color: #666; margin-bottom: 1.2rem; line-height: 1.6; font-size: 0.9rem;">How multithreaded camera buffers and ONNX Runtime acceleration achieve sub-50ms inference for biometric verification.</p>
+                        <a href="#" onclick="alert('Full research notes coming soon! Contact Sarwan for details.'); return false;" class="btn" style="padding: 0.5rem 1.4rem; font-size: 0.85rem;">Read More</a>
+                    </div>
+                </div>
+
+                <!-- Blog 2 -->
+                <div class="blog-card" style="background: var(--second-bg-color); border-radius: 1.5rem; border: 1px solid rgba(230,57,70,0.15); overflow: hidden;">
+                    <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=600&auto=format&fit=crop" style="width: 100%; height: 200px; object-fit: cover;">
+                    <div style="padding: 1.5rem;">
+                        <div style="font-size: 0.85rem; color: var(--main-color); margin-bottom: 0.5rem; font-weight: 600;">Generative AI</div>
+                        <h3 style="font-size: 1.25rem; margin-bottom: 0.8rem;">Scalable RAG with FAISS & LangChain</h3>
+                        <p style="color: #666; margin-bottom: 1.2rem; line-height: 1.6; font-size: 0.9rem;">Building high-precision semantic search over complex document repositories without hallucination.</p>
+                        <a href="#" onclick="alert('Full research notes coming soon! Contact Sarwan for details.'); return false;" class="btn" style="padding: 0.5rem 1.4rem; font-size: 0.85rem;">Read More</a>
+                    </div>
+                </div>
+
+                <!-- Blog 3 -->
+                <div class="blog-card" style="background: var(--second-bg-color); border-radius: 1.5rem; border: 1px solid rgba(230,57,70,0.15); overflow: hidden;">
+                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=600&auto=format&fit=crop" style="width: 100%; height: 200px; object-fit: cover;">
+                    <div style="padding: 1.5rem;">
+                        <div style="font-size: 0.85rem; color: var(--main-color); margin-bottom: 0.5rem; font-weight: 600;">Autonomous Robotics</div>
+                        <h3 style="font-size: 1.25rem; margin-bottom: 0.8rem;">SLAM & Navigation in ROS 2 Workflows</h3>
+                        <p style="color: #666; margin-bottom: 1.2rem; line-height: 1.6; font-size: 0.9rem;">Lessons from implementing localization and mapping on physical and simulated robotic platforms at IIIT Allahabad.</p>
+                        <a href="#" onclick="alert('Full research notes coming soon! Contact Sarwan for details.'); return false;" class="btn" style="padding: 0.5rem 1.4rem; font-size: 0.85rem;">Read More</a>
+                    </div>
+                </div>
+
+                <!-- Blog 4 -->
+                <div class="blog-card" style="background: var(--second-bg-color); border-radius: 1.5rem; border: 1px solid rgba(230,57,70,0.15); overflow: hidden;">
+                    <img src="https://images.unsplash.com/photo-1432821596592-e2c18b78144f?q=80&w=600&auto=format&fit=crop" style="width: 100%; height: 200px; object-fit: cover;">
+                    <div style="padding: 1.5rem;">
+                        <div style="font-size: 0.85rem; color: var(--main-color); margin-bottom: 0.5rem; font-weight: 600;">Deep Learning</div>
+                        <h3 style="font-size: 1.25rem; margin-bottom: 0.8rem;">Benchmarking RNN vs LSTM vs GRU</h3>
+                        <p style="color: #666; margin-bottom: 1.2rem; line-height: 1.6; font-size: 0.9rem;">Evaluating parameter size, convergence speed, and MSE loss in sequential forecasting tasks.</p>
+                        <a href="#" onclick="alert('Full research notes coming soon! Contact Sarwan for details.'); return false;" class="btn" style="padding: 0.5rem 1.4rem; font-size: 0.85rem;">Read More</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer style="background: var(--second-bg-color); text-align: center; padding: 2.5rem 10%; margin-top: 5rem; border-top: 1px solid rgba(230,57,70,0.15);">
+        <h2 style="font-family: 'Dancing Script', cursive; font-size: 3.5rem; color: var(--main-color); margin-bottom: 0.8rem;">sarwan</h2>
+        <p style="font-size: 0.95rem; color: #777;">
+            &copy; 2026 Sarwan Kumar Pandey. All Rights Reserved. Built with precision.
+        </p>
+    </footer>
+
+    <!-- Spotify Widget -->
+    <div class="spotify-widget" onclick="toggleAudio()" style="position: fixed; bottom: 30px; left: 30px; background: rgba(255, 255, 255, 0.12); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(230, 57, 70, 0.25); padding: 12px 18px; border-radius: 15px; display: flex; align-items: center; gap: 14px; z-index: 1000; box-shadow: 0 8px 32px rgba(0,0,0,0.12); transition: 0.3s; cursor: pointer;">
+        <audio id="bg-music" loop>
+            <source src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3" type="audio/mpeg">
+        </audio>
+        <div style="position: relative; width: 45px; height: 45px; border-radius: 10px; overflow: hidden; display: flex; align-items: center; justify-content: center; background: #000;">
+            <img src="https://images.unsplash.com/photo-1614680376593-902f74cf0d41?q=80&w=200&auto=format&fit=crop" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.75;" alt="lofi">
+            <i class='bx bx-play-circle' id="music-icon" style="position: absolute; color: #fff; font-size: 1.8rem; opacity: 0.95;"></i>
+        </div>
+        <div>
+            <p style="font-size: 0.7rem; color: var(--main-color); font-weight: 700; margin-bottom: 2px; text-transform: uppercase; letter-spacing: 1px;">Click to Play</p>
+            <h4 style="font-size: 0.92rem; color: var(--text-color); font-weight: 600;">Lofi Focus Beats 🎧</h4>
+        </div>
+        <div class="music-bars" id="music-bars" style="display: none; gap: 4px; align-items: flex-end; height: 15px; margin-left: 8px;">
+            <span style="width: 4px; background: var(--main-color); animation: bounce 1.2s infinite ease-in-out; border-radius: 2px;"></span>
+            <span style="width: 4px; background: var(--main-color); animation: bounce 1.2s infinite ease-in-out 0.2s; border-radius: 2px;"></span>
+            <span style="width: 4px; background: var(--main-color); animation: bounce 1.2s infinite ease-in-out 0.4s; border-radius: 2px;"></span>
+        </div>
+    </div>
+
+    <!-- Floating AI Chatbot -->
+    <div class="chatbot-container" id="chatbot-container">
+        <div class="chatbot-bubble" id="chatbot-bubble" onclick="toggleChat()" title="Chat with Sarwan's AI">
+            <i class='bx bx-bot'></i>
+        </div>
+        
+        <div class="chat-window" id="chat-window">
+            <div class="chat-header">
+                <h4>Sarwan's AI Assistant</h4>
+                <i class='bx bx-x' onclick="toggleChat()" style="cursor: pointer; font-size: 1.5rem;"></i>
+            </div>
+            <div class="chat-body" id="chat-body">
+                <div class="bot-msg">Hi! I am Sarwan's AI Assistant 🤖. What would you like to know about his AI, Computer Vision, or Robotics experience?</div>
+            </div>
+            <div class="chat-footer">
+                <input type="text" id="chat-input" placeholder="Type a message..." style="flex: 1; padding: 0.75rem 1rem; border-radius: 20px; border: 1px solid rgba(230,57,70,0.2); background: var(--bg-color); color: var(--text-color); outline: none;">
+                <button onclick="handleUserChat()" style="background: var(--main-color); color: white; border: none; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; font-size: 1.2rem; transition: 0.3s;"><i class='bx bx-send'></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LIBRARIES -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
