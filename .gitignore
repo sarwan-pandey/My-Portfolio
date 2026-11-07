@@ -3,3 +3,14 @@
 Thumbs.db
 .vscode/
 .idea/
+
+# Security: Never commit environment files or API keys
+.env
+.env.*
+*.env
+backend/.env
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
