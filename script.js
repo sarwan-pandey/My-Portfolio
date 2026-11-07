@@ -59,6 +59,9 @@ function openModal(modalId) {
     if (modal) {
         modal.style.display = 'flex';
         document.body.style.overflow = 'hidden'; // prevent background scrolling while modal is open
+        if (modalId === 'modal-blog') {
+            fetchRecentBlogs();
+        }
     }
 }
 
@@ -68,6 +71,67 @@ function closeModal(modalId) {
         modal.style.display = 'none';
         document.body.style.overflow = 'auto';
     }
+}
+
+// SciHive Dynamic Blog Integration
+let isFetchingBlogs = false;
+async function fetchRecentBlogs(forceRefresh = false) {
+    const container = document.getElementById('blog-container');
+    const refreshIcon = document.getElementById('refresh-blog-icon');
+    if (!container || isFetchingBlogs) return;
+
+    if (refreshIcon) refreshIcon.classList.add('bx-spin');
+    isFetchingBlogs = true;
+
+    try {
+        const url = 'https://portfolio-7y99.onrender.com/api/blogs';
+        const response = await fetch(url, {
+            headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+            const data = await response.json();
+            if (data.success && Array.isArray(data.articles) && data.articles.length > 0) {
+                renderBlogCards(data.articles);
+            }
+        }
+    } catch (err) {
+        console.log('Using pre-rendered SciHive articles (Render backend starting/offline):', err);
+    } finally {
+        isFetchingBlogs = false;
+        if (refreshIcon) {
+            setTimeout(() => {
+                refreshIcon.classList.remove('bx-spin');
+            }, 600);
+        }
+    }
+}
+
+function renderBlogCards(articles) {
+    const container = document.getElementById('blog-container');
+    if (!container) return;
+
+    container.innerHTML = articles.map(art => {
+        const category = art.category || 'Science & Tech';
+        const dateStr = art.date ? `<div style="font-size: 0.8rem; color: #888; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 4px;"><i class='bx bx-calendar'></i> ${art.date}</div>` : '';
+        const imgUrl = art.image || 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop';
+
+        return `
+            <div class="blog-card" style="background: var(--second-bg-color); border-radius: 1.5rem; border: 1px solid rgba(230,57,70,0.15); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                <div style="position: relative; height: 190px; overflow: hidden;">
+                    <img src="${imgUrl}" alt="${art.title}" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease;" onerror="this.src='https://images.unsplash.com/photo-1550745165-9bc0b252726f?q=80&w=800&auto=format&fit=crop'">
+                    <span style="position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; border: 1px solid rgba(230,57,70,0.4);">${category}</span>
+                </div>
+                <div style="padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1;">
+                    ${dateStr}
+                    <h3 style="font-size: 1.15rem; line-height: 1.4; margin-bottom: 0.7rem; color: var(--text-color); font-weight: 600;">${art.title}</h3>
+                    <p style="color: #666; margin-bottom: 1.4rem; line-height: 1.5; font-size: 0.88rem; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">${art.description}</p>
+                    <a href="${art.url}" target="_blank" rel="noopener noreferrer" class="btn" style="padding: 0.55rem 1.2rem; font-size: 0.85rem; width: 100%; text-align: center; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                        Read on SciHive <i class='bx bx-link-external'></i>
+                    </a>
+                </div>
+            </div>
+        `;
+    }).join('');
 }
 
 // Close modal when clicking outside modal content
@@ -363,16 +427,27 @@ function getLocalBotReply(userText) {
         );
     } else if (lower.includes("contact") || lower.includes("email") || lower.includes("hire") || lower.includes("phone")) {
         return "You can connect with Sarwan directly at <strong>sarwanpandey75@gmail.com</strong>, call <strong>+91-6206805982</strong>, or submit the contact form on this page! 📬";
-    } else if (lower.includes("college") || lower.includes("university") || lower.includes("education")) {
+    } else if (lower.includes("college") || lower.includes("education")) {
         return "Sarwan is pursuing his <strong>B.Tech in Computer Science (Artificial Intelligence & Machine Learning)</strong> at SR Institute of Management & Technology (2023–2027) in Lucknow! 🎓";
+    } else if (lower.includes("blog") || lower.includes("scihive") || lower.includes("article") || lower.includes("write") || lower.includes("post")) {
+        return (
+            "<strong>Technical Blog & Publication (SciHive):</strong><br>" +
+            "Sarwan publishes research breakdowns and technical deep-dives on <strong>SciHive</strong> (<a href='https://scihive.vercel.app' target='_blank' style='color:#e63946;'>scihive.vercel.app</a>). Key recent articles include:<br>" +
+            "• <strong>Claude 3.5 Sonnet vs GPT-4o for Python</strong>: Benchmarking async latency and coding accuracy.<br>" +
+            "• <strong>Decoding T20 Powerplay Tactics</strong>: Predictive analytics and field restriction modeling.<br>" +
+            "• <strong>Tune Steam Deck TDP & Refresh Rates</strong>: Extending handheld battery life up to 75%.<br>" +
+            "• <strong>Typesafe AI Raises $870M</strong>: Enterprise inference infrastructure trends.<br>" +
+            "You can open the Blog modal in the top navigation or visit <a href='https://scihive.vercel.app' target='_blank' style='color:#e63946;'>scihive.vercel.app</a> directly! 🚀"
+        );
     } else {
         return (
-            "I'm Sarwan's personal AI Assistant! You can ask me code-level questions about his GitHub projects:<br>" +
+            "I'm Sarwan's personal AI Assistant! You can ask me code-level questions about his GitHub projects & writing:<br>" +
             "• <strong>FaceID Studio</strong>: Multithreaded ONNX facial recognition.<br>" +
             "• <strong>RAG Pipeline</strong>: LangChain, FAISS & Hugging Face vector search.<br>" +
             "• <strong>RNN Sequence Prediction</strong>: Benchmarking RNN vs LSTM vs GRU.<br>" +
             "• <strong>CIFAR-10 Classifier</strong>: CNN deployed with asynchronous FastAPI.<br>" +
-            "• <strong>Robotics at IIIT Allahabad</strong>: ROS 2, SLAM, and drone integration."
+            "• <strong>Robotics at IIIT Allahabad</strong>: ROS 2, SLAM, and drone integration.<br>" +
+            "• <strong>SciHive Technical Blog</strong>: Research essays on AI, Handheld Tuning, and Analytics."
         );
     }
 }

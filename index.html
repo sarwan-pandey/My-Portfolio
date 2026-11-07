@@ -692,53 +692,135 @@
 
     <!-- Blog Modal -->
     <div id="modal-blog" class="modal">
-        <div class="modal-content">
+        <div class="modal-content" style="max-width: 1100px; width: 92%;">
             <span class="close-modal" onclick="closeModal('modal-blog')">&times;</span>
-            <h2 class="heading">Technical <span>Insights</span></h2>
             
-            <div class="blog-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <div style="display: inline-flex; align-items: center; gap: 8px; background: rgba(230, 57, 70, 0.1); border: 1px solid rgba(230, 57, 70, 0.3); padding: 0.4rem 1.1rem; border-radius: 20px; font-size: 0.82rem; font-weight: 600; color: var(--main-color); margin-bottom: 0.8rem;">
+                    <i class='bx bx-broadcast' style="animation: pulse 1.8s infinite;"></i> SciHive Official Publication
+                </div>
+                <h2 class="heading" style="margin-bottom: 0.5rem;">Recent <span>Blog Posts</span></h2>
+                <p style="color: #666; font-size: 0.95rem; max-width: 680px; margin: 0 auto 1.4rem; line-height: 1.6;">
+                    Technical research, engineering deep-dives, and performance analyses published by Sarwan on <strong style="color: var(--main-color);">SciHive</strong> (<a href="https://scihive.vercel.app" target="_blank" rel="noopener noreferrer" style="color: var(--main-color); text-decoration: underline;">scihive.vercel.app</a>).
+                </p>
+                <div style="display: flex; gap: 12px; justify-content: center; align-items: center; flex-wrap: wrap;">
+                    <a href="https://scihive.vercel.app" target="_blank" rel="noopener noreferrer" class="btn" style="padding: 0.6rem 1.5rem; font-size: 0.9rem; display: inline-flex; align-items: center; gap: 8px;">
+                        <i class='bx bx-link-external'></i> Visit SciHive Blog
+                    </a>
+                    <button id="refresh-blog-btn" onclick="fetchRecentBlogs(true)" class="btn" style="padding: 0.6rem 1.5rem; font-size: 0.9rem; background: transparent; color: var(--main-color); border: 2px solid var(--main-color); display: inline-flex; align-items: center; gap: 8px; cursor: pointer;">
+                        <i class='bx bx-refresh' id="refresh-blog-icon"></i> Refresh Latest
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dynamic Blog Grid -->
+            <div id="blog-container" class="blog-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 1.5rem;">
                 
-                <!-- Blog 1 -->
-                <div class="blog-card" style="background: var(--second-bg-color); border-radius: 1.5rem; border: 1px solid rgba(230,57,70,0.15); overflow: hidden;">
-                    <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=600&auto=format&fit=crop" style="width: 100%; height: 200px; object-fit: cover;">
-                    <div style="padding: 1.5rem;">
-                        <div style="font-size: 0.85rem; color: var(--main-color); margin-bottom: 0.5rem; font-weight: 600;">Computer Vision</div>
-                        <h3 style="font-size: 1.25rem; margin-bottom: 0.8rem;">Real-Time Face Recognition with ONNX</h3>
-                        <p style="color: #666; margin-bottom: 1.2rem; line-height: 1.6; font-size: 0.9rem;">How multithreaded camera buffers and ONNX Runtime acceleration achieve sub-50ms inference for biometric verification.</p>
-                        <a href="#" onclick="alert('Full research notes coming soon! Contact Sarwan for details.'); return false;" class="btn" style="padding: 0.5rem 1.4rem; font-size: 0.85rem;">Read More</a>
+                <!-- Blog Card 1 -->
+                <div class="blog-card" style="background: var(--second-bg-color); border-radius: 1.5rem; border: 1px solid rgba(230,57,70,0.15); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div style="position: relative; height: 190px; overflow: hidden;">
+                        <img src="https://scihive.vercel.app/media/articles/decoding-t20-powerplay-tactics-how-analytics-reshapes-overs-1-6.jpg" alt="Decoding T20 Powerplay Tactics" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=800&auto=format&fit=crop'">
+                        <span style="position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; border: 1px solid rgba(230,57,70,0.4);">Sports and Cricket</span>
+                    </div>
+                    <div style="padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1;">
+                        <div style="font-size: 0.8rem; color: #888; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 4px;">
+                            <i class='bx bx-calendar'></i> 2026-11-02
+                        </div>
+                        <h3 style="font-size: 1.15rem; line-height: 1.4; margin-bottom: 0.7rem; color: var(--text-color); font-weight: 600;">Decoding T20 Powerplay Tactics: How Analytics Reshapes Overs 1-6</h3>
+                        <p style="color: #666; margin-bottom: 1.4rem; line-height: 1.5; font-size: 0.88rem; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">Learn how modern T20 powerplay analytics and field placements optimize boundary scoring while helping bowlers secure vital early wickets in overs 1 to 6.</p>
+                        <a href="https://scihive.vercel.app/article/decoding-t20-powerplay-tactics-how-analytics-reshapes-overs-1-6" target="_blank" rel="noopener noreferrer" class="btn" style="padding: 0.55rem 1.2rem; font-size: 0.85rem; width: 100%; text-align: center; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                            Read on SciHive <i class='bx bx-link-external'></i>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Blog 2 -->
-                <div class="blog-card" style="background: var(--second-bg-color); border-radius: 1.5rem; border: 1px solid rgba(230,57,70,0.15); overflow: hidden;">
-                    <img src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=600&auto=format&fit=crop" style="width: 100%; height: 200px; object-fit: cover;">
-                    <div style="padding: 1.5rem;">
-                        <div style="font-size: 0.85rem; color: var(--main-color); margin-bottom: 0.5rem; font-weight: 600;">Generative AI</div>
-                        <h3 style="font-size: 1.25rem; margin-bottom: 0.8rem;">Scalable RAG with FAISS & LangChain</h3>
-                        <p style="color: #666; margin-bottom: 1.2rem; line-height: 1.6; font-size: 0.9rem;">Building high-precision semantic search over complex document repositories without hallucination.</p>
-                        <a href="#" onclick="alert('Full research notes coming soon! Contact Sarwan for details.'); return false;" class="btn" style="padding: 0.5rem 1.4rem; font-size: 0.85rem;">Read More</a>
+                <!-- Blog Card 2 -->
+                <div class="blog-card" style="background: var(--second-bg-color); border-radius: 1.5rem; border: 1px solid rgba(230,57,70,0.15); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div style="position: relative; height: 190px; overflow: hidden;">
+                        <img src="https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg?auto=compress&cs=tinysrgb&w=1260" alt="Claude 3.5 Sonnet vs GPT-4o" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop'">
+                        <span style="position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; border: 1px solid rgba(230,57,70,0.4);">Artificial Intelligence</span>
+                    </div>
+                    <div style="padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1;">
+                        <div style="font-size: 0.8rem; color: #888; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 4px;">
+                            <i class='bx bx-calendar'></i> 2026-10-10
+                        </div>
+                        <h3 style="font-size: 1.15rem; line-height: 1.4; margin-bottom: 0.7rem; color: var(--text-color); font-weight: 600;">Claude 3.5 Sonnet vs GPT-4o for Python Backend Development</h3>
+                        <p style="color: #666; margin-bottom: 1.4rem; line-height: 1.5; font-size: 0.88rem; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">Deep-dive benchmark comparing Claude 3.5 Sonnet and GPT-4o on real-world Python asynchronous microservices, FastAPI event loops, and refactoring performance.</p>
+                        <a href="https://scihive.vercel.app/article/claude-35-sonnet-vs-gpt-4o-for-python" target="_blank" rel="noopener noreferrer" class="btn" style="padding: 0.55rem 1.2rem; font-size: 0.85rem; width: 100%; text-align: center; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                            Read on SciHive <i class='bx bx-link-external'></i>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Blog 3 -->
-                <div class="blog-card" style="background: var(--second-bg-color); border-radius: 1.5rem; border: 1px solid rgba(230,57,70,0.15); overflow: hidden;">
-                    <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?q=80&w=600&auto=format&fit=crop" style="width: 100%; height: 200px; object-fit: cover;">
-                    <div style="padding: 1.5rem;">
-                        <div style="font-size: 0.85rem; color: var(--main-color); margin-bottom: 0.5rem; font-weight: 600;">Autonomous Robotics</div>
-                        <h3 style="font-size: 1.25rem; margin-bottom: 0.8rem;">SLAM & Navigation in ROS 2 Workflows</h3>
-                        <p style="color: #666; margin-bottom: 1.2rem; line-height: 1.6; font-size: 0.9rem;">Lessons from implementing localization and mapping on physical and simulated robotic platforms at IIIT Allahabad.</p>
-                        <a href="#" onclick="alert('Full research notes coming soon! Contact Sarwan for details.'); return false;" class="btn" style="padding: 0.5rem 1.4rem; font-size: 0.85rem;">Read More</a>
+                <!-- Blog Card 3 -->
+                <div class="blog-card" style="background: var(--second-bg-color); border-radius: 1.5rem; border: 1px solid rgba(230,57,70,0.15); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div style="position: relative; height: 190px; overflow: hidden;">
+                        <img src="https://scihive.vercel.app/media/articles/typesafe-ai-raises-870m-at-75b-valuation.jpg" alt="Typesafe AI Raises $870M" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop'">
+                        <span style="position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; border: 1px solid rgba(230,57,70,0.4);">Artificial Intelligence</span>
+                    </div>
+                    <div style="padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1;">
+                        <div style="font-size: 0.8rem; color: #888; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 4px;">
+                            <i class='bx bx-calendar'></i> 2026-10-10
+                        </div>
+                        <h3 style="font-size: 1.15rem; line-height: 1.4; margin-bottom: 0.7rem; color: var(--text-color); font-weight: 600;">Typesafe AI Raises $870M at $7.5B Valuation</h3>
+                        <p style="color: #666; margin-bottom: 1.4rem; line-height: 1.5; font-size: 0.88rem; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">Silicon Valley venture capital update: In-depth analysis of Typesafe AI's mega-funding round and its implications for enterprise AI inference infrastructure.</p>
+                        <a href="https://scihive.vercel.app/article/typesafe-ai-raises-870m-at-75b-valuation" target="_blank" rel="noopener noreferrer" class="btn" style="padding: 0.55rem 1.2rem; font-size: 0.85rem; width: 100%; text-align: center; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                            Read on SciHive <i class='bx bx-link-external'></i>
+                        </a>
                     </div>
                 </div>
 
-                <!-- Blog 4 -->
-                <div class="blog-card" style="background: var(--second-bg-color); border-radius: 1.5rem; border: 1px solid rgba(230,57,70,0.15); overflow: hidden;">
-                    <img src="https://images.unsplash.com/photo-1432821596592-e2c18b78144f?q=80&w=600&auto=format&fit=crop" style="width: 100%; height: 200px; object-fit: cover;">
-                    <div style="padding: 1.5rem;">
-                        <div style="font-size: 0.85rem; color: var(--main-color); margin-bottom: 0.5rem; font-weight: 600;">Deep Learning</div>
-                        <h3 style="font-size: 1.25rem; margin-bottom: 0.8rem;">Benchmarking RNN vs LSTM vs GRU</h3>
-                        <p style="color: #666; margin-bottom: 1.2rem; line-height: 1.6; font-size: 0.9rem;">Evaluating parameter size, convergence speed, and MSE loss in sequential forecasting tasks.</p>
-                        <a href="#" onclick="alert('Full research notes coming soon! Contact Sarwan for details.'); return false;" class="btn" style="padding: 0.5rem 1.4rem; font-size: 0.85rem;">Read More</a>
+                <!-- Blog Card 4 -->
+                <div class="blog-card" style="background: var(--second-bg-color); border-radius: 1.5rem; border: 1px solid rgba(230,57,70,0.15); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div style="position: relative; height: 190px; overflow: hidden;">
+                        <img src="https://images.unsplash.com/photo-1538481199705-c710c4e965fc?q=80&w=800&auto=format&fit=crop" alt="Tune Steam Deck TDP" style="width: 100%; height: 100%; object-fit: cover;">
+                        <span style="position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; border: 1px solid rgba(230,57,70,0.4);">Handheld & Gaming</span>
+                    </div>
+                    <div style="padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1;">
+                        <div style="font-size: 0.8rem; color: #888; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 4px;">
+                            <i class='bx bx-calendar'></i> 2026-10-25
+                        </div>
+                        <h3 style="font-size: 1.15rem; line-height: 1.4; margin-bottom: 0.7rem; color: var(--text-color); font-weight: 600;">Tune Steam Deck TDP and Refresh Rates for Peak Battery</h3>
+                        <p style="color: #666; margin-bottom: 1.4rem; line-height: 1.5; font-size: 0.88rem; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">Learn how to tune Steam Deck TDP limits and screen refresh rates. Boost battery life by up to 75 percent without sacrificing visual fluidity or stable frames.</p>
+                        <a href="https://scihive.vercel.app/article/tune-steam-deck-tdp-and-refresh-rates-for-peak-battery" target="_blank" rel="noopener noreferrer" class="btn" style="padding: 0.55rem 1.2rem; font-size: 0.85rem; width: 100%; text-align: center; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                            Read on SciHive <i class='bx bx-link-external'></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Blog Card 5 -->
+                <div class="blog-card" style="background: var(--second-bg-color); border-radius: 1.5rem; border: 1px solid rgba(230,57,70,0.15); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div style="position: relative; height: 190px; overflow: hidden;">
+                        <img src="https://scihive.vercel.app/media/articles/english-vs-kashmir-willow-impact-on-t20-powerplay-scoring.jpg" alt="English vs Kashmir Willow" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?q=80&w=800&auto=format&fit=crop'">
+                        <span style="position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; border: 1px solid rgba(230,57,70,0.4);">Sports and Cricket</span>
+                    </div>
+                    <div style="padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1;">
+                        <div style="font-size: 0.8rem; color: #888; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 4px;">
+                            <i class='bx bx-calendar'></i> 2026-10-30
+                        </div>
+                        <h3 style="font-size: 1.15rem; line-height: 1.4; margin-bottom: 0.7rem; color: var(--text-color); font-weight: 600;">English vs Kashmir Willow: Impact on T20 Powerplay Scoring</h3>
+                        <p style="color: #666; margin-bottom: 1.4rem; line-height: 1.5; font-size: 0.88rem; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">Explore how T20 powerplay tactics, bat willow performance, and matchup analytics drive early run rates and bowling strategies across professional leagues.</p>
+                        <a href="https://scihive.vercel.app/article/english-vs-kashmir-willow-impact-on-t20-powerplay-scoring" target="_blank" rel="noopener noreferrer" class="btn" style="padding: 0.55rem 1.2rem; font-size: 0.85rem; width: 100%; text-align: center; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                            Read on SciHive <i class='bx bx-link-external'></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Blog Card 6 -->
+                <div class="blog-card" style="background: var(--second-bg-color); border-radius: 1.5rem; border: 1px solid rgba(230,57,70,0.15); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                    <div style="position: relative; height: 190px; overflow: hidden;">
+                        <img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1260" alt="Neuralink Blindsight" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.src='https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=800&auto=format&fit=crop'">
+                        <span style="position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,0.75); backdrop-filter: blur(6px); color: #fff; padding: 4px 12px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; border: 1px solid rgba(230,57,70,0.4);">Health & Neuroscience</span>
+                    </div>
+                    <div style="padding: 1.5rem; display: flex; flex-direction: column; flex-grow: 1;">
+                        <div style="font-size: 0.8rem; color: #888; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 4px;">
+                            <i class='bx bx-calendar'></i> 2026-10-09
+                        </div>
+                        <h3 style="font-size: 1.15rem; line-height: 1.4; margin-bottom: 0.7rem; color: var(--text-color); font-weight: 600;">Neuralink Blindsight Device FDA Trial Results October 2026</h3>
+                        <p style="color: #666; margin-bottom: 1.4rem; line-height: 1.5; font-size: 0.88rem; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">Breakdown of clinical trials and FDA regulatory status for Neuralink's Blindsight visual prosthesis technology and neural interfaces.</p>
+                        <a href="https://scihive.vercel.app/article/neuralink-blindsight-device-fda-trial" target="_blank" rel="noopener noreferrer" class="btn" style="padding: 0.55rem 1.2rem; font-size: 0.85rem; width: 100%; text-align: center; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                            Read on SciHive <i class='bx bx-link-external'></i>
+                        </a>
                     </div>
                 </div>
 
