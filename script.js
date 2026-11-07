@@ -766,8 +766,8 @@ if (termInput) {
                 response = 'Sarwan Kumar Pandey - AI & ML Engineer, Computer Vision Specialist & Robotics Developer (Lucknow, India).';
             } else if (cmd === 'ls') {
                 response = '<span style="color:#e63946;">face_id_studio.py</span>  <span style="color:#4ec9b0;">rag_pipeline.py</span>  <span style="color:#dcdcaa;">ros2_ws/</span>  <span style="color:#9cdcfe;">cifar10_cnn.py</span>  <span style="color:#c586c0;">rnn_benchmark.ipynb</span>  <span style="color:#ffb703;">resume.pdf</span>';
-            } else if (cmd === 'cat resume.pdf') {
-                response = 'Verified resume package ready: <a href="resume.pdf" target="_blank" style="color: #e63946; text-decoration: underline; font-weight: bold;">[Download Sarwan Kumar Pandey CV]</a>';
+            } else if (cmd === 'cat resume.pdf' || cmd === 'cat resume') {
+                response = 'Verified resume package ready: <a href="Sarwan_Kumar_Pandey_Resume.pdf" target="_blank" download="Sarwan_Kumar_Pandey_Resume.pdf" style="color: #e63946; text-decoration: underline; font-weight: bold;">[Download Sarwan Kumar Pandey CV]</a>';
             } else if (cmd === 'sudo hire sarwan') {
                 response = 'Access Granted. Redirecting to direct contact form...';
                 setTimeout(() => window.location.href = '#contact', 1200);

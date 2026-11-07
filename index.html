@@ -57,7 +57,7 @@
     <div id="custom-menu" style="display: none; position: absolute; z-index: 100000; width: 230px; background: rgba(255, 255, 255, 0.12); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); border: 1px solid rgba(230, 57, 70, 0.35); border-radius: 12px; box-shadow: 0 15px 35px rgba(0,0,0,0.25); overflow: hidden; padding: 6px 0;">
         <ul style="list-style: none; margin: 0; padding: 0;">
             <li class="menu-item" style="padding: 10px 20px; font-size: 0.9rem; color: var(--text-color); cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px;" onclick="window.location.href='#contact'"><i class='bx bx-envelope'></i> Hire Sarwan</li>
-            <li class="menu-item" style="padding: 10px 20px; font-size: 0.9rem; color: var(--text-color); cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px;" onclick="window.open('resume.pdf')"><i class='bx bx-download'></i> Download CV</li>
+            <li class="menu-item" style="padding: 10px 20px; font-size: 0.9rem; color: var(--text-color); cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px;" onclick="window.open('Sarwan_Kumar_Pandey_Resume.pdf')"><i class='bx bx-download'></i> Download CV</li>
             <li class="menu-item" style="padding: 10px 20px; font-size: 0.9rem; color: var(--text-color); cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px;" onclick="document.getElementById('dev-terminal').style.display='flex'; document.getElementById('terminal-input').focus();"><i class='bx bx-terminal'></i> Open Terminal</li>
             <div style="height: 1px; background: rgba(230, 57, 70, 0.2); margin: 5px 0;"></div>
             <li class="menu-item" style="padding: 10px 20px; font-size: 0.9rem; color: var(--text-color); cursor: pointer; transition: 0.3s; display: flex; align-items: center; gap: 10px;" onclick="document.getElementById('dark-mode-icon').click()"><i class='bx bx-moon'></i> Toggle Dark Mode</li>
@@ -140,7 +140,7 @@
             </div>
 
             <a href="#contact" class="btn">Hire Me</a>
-            <a href="resume.pdf" download class="btn cv-btn" style="background: transparent; color: var(--main-color); border: 2px solid var(--main-color); margin-left: 10px;">Download CV</a>
+            <a href="Sarwan_Kumar_Pandey_Resume.pdf" download="Sarwan_Kumar_Pandey_Resume.pdf" class="btn cv-btn" style="background: transparent; color: var(--main-color); border: 2px solid var(--main-color); margin-left: 10px;">Download CV</a>
         </div>
         
         <div class="home-img">
@@ -415,7 +415,7 @@
                     
                     <!-- Project 1: FaceID Studio -->
                     <div class="projects-box">
-                        <img src="images/aesthetic_coding.png" alt="FaceID Studio" style="width: 100%; height: 220px; object-fit: cover; border-radius: 1rem; margin-bottom: 1.5rem;">
+                        <img src="images/project_faceid.jpg" alt="FaceID Studio – Real-Time Face Recognition" style="width: 100%; height: 220px; object-fit: cover; border-radius: 1rem; margin-bottom: 1.5rem;">
                         <div class="projects-content">
                             <h3>FaceID Studio – Real-Time Face Recognition</h3>
                             <p>Engineered a real-time face recognition application with multithreaded camera processing. Cached face embeddings, added configurable recognition thresholds, and implemented comprehensive gallery management with ONNX Runtime acceleration.</p>
@@ -431,7 +431,7 @@
 
                     <!-- Project 2: RAG Pipeline -->
                     <div class="projects-box">
-                        <img src="images/quote1.png" alt="RAG Pipeline" style="width: 100%; height: 220px; object-fit: cover; border-radius: 1rem; margin-bottom: 1.5rem;">
+                        <img src="images/project_rag.jpg" alt="Retrieval-Augmented Generation (RAG) Pipeline" style="width: 100%; height: 220px; object-fit: cover; border-radius: 1rem; margin-bottom: 1.5rem;">
                         <div class="projects-content">
                             <h3>Retrieval-Augmented Generation (RAG) Pipeline</h3>
                             <p>Created a knowledge-based question-answering system using document embeddings and semantic similarity search via FAISS. Integrated vector retrieval with LLM-based generation to improve response relevance and ground answers in factual context.</p>
@@ -448,7 +448,7 @@
 
                     <!-- Project 3: Sequence Prediction RNNs -->
                     <div class="projects-box">
-                        <img src="images/quote2.png" alt="Sequence Prediction" style="width: 100%; height: 220px; object-fit: cover; border-radius: 1rem; margin-bottom: 1.5rem;">
+                        <img src="images/project_rnn.jpg" alt="Sequence Prediction using RNNs" style="width: 100%; height: 220px; object-fit: cover; border-radius: 1rem; margin-bottom: 1.5rem;">
                         <div class="projects-content">
                             <h3>Sequence Prediction using RNNs</h3>
                             <p>Implemented time-series forecasting and next-word prediction models using Embedding and SimpleRNN layers in TensorFlow/Keras. Benchmarked 3 recurrent architectures (RNN, LSTM, GRU) using Mean Squared Error (MSE) loss metrics.</p>
@@ -465,7 +465,7 @@
 
                     <!-- Project 4: Image Classifier Web App -->
                     <div class="projects-box">
-                        <img src="images/aesthetic_coding.png" alt="CIFAR-10 Classifier" style="width: 100%; height: 220px; object-fit: cover; border-radius: 1rem; margin-bottom: 1.5rem;">
+                        <img src="images/project_cifar10.jpg" alt="Image Classifier Web Application" style="width: 100%; height: 220px; object-fit: cover; border-radius: 1rem; margin-bottom: 1.5rem;">
                         <div class="projects-content">
                             <h3>Image Classifier Web Application</h3>
                             <p>Designed a CNN classifier for the 10-class, 60,000-image CIFAR-10 dataset. Deployed the TensorFlow/Keras trained model through a lightweight, asynchronous FastAPI web service for real-time image prediction and classification.</p>
